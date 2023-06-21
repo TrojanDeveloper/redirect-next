@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps<
   const { preview = false, previewData = {} } = ctx
   const referer = ctx.req.headers.referer || '';
 
-  if (referer.includes('lnkd.in') || referer.includes('facebook.com')) {
+  if (referer.includes('linkedin.com') || referer.includes('lnkd.in') || referer.includes('facebook.com')) {
     return {
       redirect: {
         destination: 'https://your-redirect-url.com',
