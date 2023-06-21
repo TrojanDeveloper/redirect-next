@@ -2,7 +2,7 @@ import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import { getAllPosts, getSettings } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import { lazy } from 'react'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
@@ -40,22 +40,12 @@ export default function Page(props: PageProps) {
   return <IndexPage posts={posts} settings={settings} />
 }
 
-export const getServerSideProps: GetServerSideProps<
+export const getStaticProps: GetStaticProps<
   PageProps,
   Query,
   PreviewData
 > = async (ctx) => {
   const { preview = false, previewData = {} } = ctx
-  const referer = ctx.req.headers.referer || '';
-
-  if (referer.includes('linkedin.com') || referer.includes('lnkd.in') || referer.includes('facebook.com')) {
-    return {
-      redirect: {
-        destination: 'https://your-redirect-url.com',
-        permanent: false,
-      },
-    };
-  }
 
   const [settings, posts = []] = await Promise.all([
     getSettings(),
