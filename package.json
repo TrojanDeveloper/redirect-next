@@ -6,7 +6,7 @@
     "format": "npx prettier --write . --ignore-path .gitignore --cache",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "npm run format && npm run lint -- --fix",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "type-check": "tsc --noEmit"
   },
   "prettier": {
